@@ -8,6 +8,5 @@ namespace Repositories.Contracts
 {
     public interface IRepositoryManager
     { 
-        public ILoginRepository loginRepository { get; }
     }
 }

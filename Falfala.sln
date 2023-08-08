@@ -9,11 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{196D0C1B-A553-491E-A7C9-9BA2EC59884D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Falfala", "Falfala\Falfala.csproj", "{6BB82EDC-E3E0-4EED-8542-E524CC433784}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{6A41FC1B-83FB-44E4-B021-52642928114A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiarFalfala", "MiarFalfala\MiarFalfala.csproj", "{D1D21890-A445-4FDE-BB80-6B469489FCD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiarFalfala", "MiarFalfala\MiarFalfala.csproj", "{D1D21890-A445-4FDE-BB80-6B469489FCD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +31,6 @@ Global
 		{196D0C1B-A553-491E-A7C9-9BA2EC59884D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{196D0C1B-A553-491E-A7C9-9BA2EC59884D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{196D0C1B-A553-491E-A7C9-9BA2EC59884D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BB82EDC-E3E0-4EED-8542-E524CC433784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BB82EDC-E3E0-4EED-8542-E524CC433784}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BB82EDC-E3E0-4EED-8542-E524CC433784}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BB82EDC-E3E0-4EED-8542-E524CC433784}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A41FC1B-83FB-44E4-B021-52642928114A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A41FC1B-83FB-44E4-B021-52642928114A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A41FC1B-83FB-44E4-B021-52642928114A}.Release|Any CPU.ActiveCfg = Release|Any CPU

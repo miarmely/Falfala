@@ -10,13 +10,11 @@ namespace Services.Concretes
 {
     public class ServiceManager : IServiceManager
     {
-        private readonly Lazy<ILoginService> _loginService;
-        public ILoginService loginService => _loginService.Value;
-
+        
 
         public ServiceManager(IRepositoryManager manager)
         {
-            _loginService = new Lazy<ILoginService>(() => new LoginService(manager));
+         
         }   
     }
 }

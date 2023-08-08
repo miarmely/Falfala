@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repositories.Contracts
 {
-    public interface ILoginRepository : IRepositoryBase<Login>
+    public interface IMaritalStatusRepository : IRepositoryBase<MaritalStatus>
     {
-        Login? FindLogin(string username, string password, bool trackChanges);
+        MaritalStatus GetMaritalStatusByStatusName(string statusName, bool trackChanges);
     }
 }

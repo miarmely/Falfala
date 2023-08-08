@@ -8,6 +8,5 @@ namespace Services.Contracts
 {
     public interface IServiceManager
     {
-        public ILoginService loginService { get; }
     }
 }

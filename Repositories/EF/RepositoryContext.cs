@@ -11,7 +11,8 @@ namespace Repositories.EF
 {
     public class RepositoryContext : DbContext
     {
-        public DbSet<Login> Logins { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<MaritalStatus> MaritalStatuses{ get; set; }
 
 
         public RepositoryContext(DbContextOptions options) : base(options)
@@ -20,7 +21,7 @@ namespace Repositories.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new LoginConfig());
+            modelBuilder.ApplyConfiguration(new MaritalStatusConfig());
         }
     }
 }

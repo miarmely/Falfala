@@ -10,13 +10,9 @@ namespace Repositories.Concretes
 {
     public class RepositoryManager : IRepositoryManager
     {
-        private readonly Lazy<ILoginRepository> _loginRepository;
-        public ILoginRepository loginRepository => _loginRepository.Value;
-        
 
         public RepositoryManager(RepositoryContext context)
         {
-            _loginRepository = new Lazy<ILoginRepository>(() => new LoginRepository(context));           
         }
     }
 }
