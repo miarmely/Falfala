@@ -30,13 +30,40 @@ namespace Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<string>("Status")
+                    b.Property<string>("StatusName")
                         .IsRequired()
                         .HasColumnType("varchar(12)");
 
                     b.HasKey("Id");
 
                     b.ToTable("MaritalStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            StatusName = "Bekar"
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            StatusName = "Evli"
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            StatusName = "İlişkisi var"
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            StatusName = "İlişkisi yok"
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            StatusName = "Karmaşık"
+                        });
                 });
 
             modelBuilder.Entity("Entities.DataModels.User", b =>

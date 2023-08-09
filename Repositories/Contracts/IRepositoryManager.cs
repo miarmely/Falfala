@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Repositories.Contracts
 {
     public interface IRepositoryManager
-    { 
+    {
+        IUserRepository UserRepository { get; }
+        IMaritalStatusRepository MaritalStatusRepository { get; }
+        void Save();
     }
 }

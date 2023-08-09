@@ -17,9 +17,9 @@ namespace Entities.ViewModels
         public string? Email { get; set; }
         public int? Age { get; set; }
         public string? Job { get; set; }
-        public bool? Sex { get; set; }
+        public string? Sex { get; set; }
         public string? BirthDate { get; set; }
-        public string? StatusName { get; set; }
+        public string? MaritalStatus { get; set; }
         public string? Password { get; set; }
     }
 }

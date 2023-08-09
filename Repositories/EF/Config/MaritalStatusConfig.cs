@@ -14,11 +14,11 @@ namespace Repositories.EF.Config
         public void Configure(EntityTypeBuilder<MaritalStatus> builder)
         {
             builder.HasData(
-                new MaritalStatus() { Id = 1, Status = "Bekar" },
-                new MaritalStatus() { Id = 2, Status = "Evli" },
-                new MaritalStatus() { Id = 3, Status = "İlişkisi var" },
-                new MaritalStatus() { Id = 4, Status = "İlişkisi yok" },
-                new MaritalStatus() { Id = 5, Status = "Karmaşık" });
+                new MaritalStatus() { Id = 1, StatusName = "Bekar" },
+                new MaritalStatus() { Id = 2, StatusName = "Evli" },
+                new MaritalStatus() { Id = 3, StatusName = "İlişkisi var" },
+                new MaritalStatus() { Id = 4, StatusName = "İlişkisi yok" },
+                new MaritalStatus() { Id = 5, StatusName = "Karmaşık" });
         }
     }
 }

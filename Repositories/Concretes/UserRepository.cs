@@ -1,6 +1,7 @@
 ﻿using Entities.DataModels;
 using Repositories.Contracts;
 using Repositories.EF;
+using System.Linq.Expressions;
 
 
 namespace Repositories.Concretes
@@ -15,23 +16,29 @@ namespace Repositories.Concretes
             base.Create(user);
 
 
-        public User? FindUserById(int id, bool trackChanges) =>
+        public IQueryable<User> GetAllUsers(bool trackChanges) =>
+            base.FindAll(trackChanges)
+            .OrderBy(u => u.Id);
+
+
+        public IQueryable<User> GetUsersWithCondition(Expression<Func<User, bool>> findExpression, bool trackChanges) =>
+            base.FindWithCondition(findExpression, trackChanges)
+            .OrderBy(u => u.Id);
+
+
+        public User? GetUserById(int id, bool trackChanges) =>
             base.FindWithCondition(u => u.Id == id, trackChanges)
             .FirstOrDefault();
 
 
-        public User? FindUserByEmail(string email, bool trackChanges) =>
+        public User? GetUserByEmail(string email, bool trackChanges) =>
             base.FindWithCondition(u => u.Email.Equals(email), trackChanges)
             .FirstOrDefault();
 
 
-        public IQueryable<User> GetAllUsers(bool trackChanges) =>
-            base.FindAll(trackChanges);
-
-
         public void UpdateUser(User user) =>
             base.Update(user);
-        
+
 
         public void DeleteUser(User user) =>
             base.Delete(user);

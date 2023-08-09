@@ -16,10 +16,8 @@ namespace Repositories.Concretes
         { }
 
 
-        public MaritalStatus GetMaritalStatusByStatusName(string statusName, bool trackChanges)
-
-
-
-
+        public MaritalStatus GetMaritalStatusByStatusName(string statusName, bool trackChanges) =>
+            base.FindWithCondition(m => m.StatusName.Equals(statusName), trackChanges)
+            .First();
     }
 }
