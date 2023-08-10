@@ -6,12 +6,12 @@ using Services.Contracts;
 
 namespace Services.Concretes
 {
-    public class UserService : IUserService
+    public class RegisterService : IRegisterService
     {
         private readonly IRepositoryManager _manager;
 
 
-        public UserService(IRepositoryManager manager) =>
+        public RegisterService(IRepositoryManager manager) =>
             _manager = manager;
 
 
@@ -80,21 +80,15 @@ namespace Services.Concretes
 
         private void ControlEmail(ref string errorCode, string email)
         {
-            var emailTags = new List<string>() {
-                "@gmail.com",
-                "@hotmail.com",
-                "@outlook.com"
-            };
-
             // when is wrong
-            if (!emailTags.Any(e => email.EndsWith(e)))
+            if (!email.Contains("@"))
                 errorCode += "E";  // E: Email
         }
 
 
         private void ControlPassword(ref string errorCode, string password)
         {
-            var specialChars = new List<char>() { '!', '*', '.', ',', '@', '?'};
+            var specialChars = new List<char>() { '!', '*', '.', ',', '@', '?', '_'};
 
             // length Control
             if (password.Length < 6  // min len
@@ -134,5 +128,3 @@ namespace Services.Concretes
  * R-FE-P   -> (P)assword
 
 */
-
-

@@ -1,54 +1,45 @@
 ﻿using Entities.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Presentation.Controllers
 {
     [ApiController]
-    [Route("api/user")]
-    public class UserController : ControllerBase
+    [Route("api/register")]
+    public class RegisterController : ControllerBase
     {
         private readonly IServiceManager _manager;
 
 
-        public UserController(IServiceManager manager) =>
+        public RegisterController(IServiceManager manager) =>
             _manager = manager;
 
 
-        [HttpPost("register")]
+        [HttpPost]
         public IActionResult CreateUser([FromBody] UserView userView)
         {
             try
             {
                 // format control
-                _manager
-                    .UserService
+                _manager.RegisterService
                     .ControlFormatError(userView);
 
                 // email, telNo already exists?
-                _manager
-                    .UserService
+                _manager.RegisterService
                     .ControlConflictError(userView);
 
                 // userView convert to user
-                var user = _manager
-                    .DataConverterService
+                var user = _manager.DataConverterService
                     .ConvertToUser(userView);
 
                 // set StatusId
-                user.StatusId = _manager
-                    .MaritalStatusService
+                user.StatusId = _manager.MaritalStatusService
                     .GetMaritalStatusByStatusName(userView.MaritalStatus, false)
                     .Id;
 
                 // create
-                _manager
-                    .UserService
+                _manager.RegisterService
                     .CreateUser(user);
 
                 userView.Id = user.Id;

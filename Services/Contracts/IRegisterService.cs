@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Services.Contracts
 {
-    public interface IUserService
+    public interface IRegisterService
     {
         void CreateUser(User user);
         public void ControlFormatError(UserView userView);
