@@ -1,4 +1,4 @@
-﻿namespace Entities.ViewModels
+namespace Entities.ViewModels
 {
     public class LoginView
     {

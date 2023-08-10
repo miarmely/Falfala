@@ -13,10 +13,10 @@ namespace Services.Concretes
             _manager = manager;
        
 
-        public void VerifyEmailAndPassword(string email, string password)
+        public async Task VerifyEmailAndPassword(string email, string password)
         {
             // get employee matched with email
-            var entity = _manager.UserRepository
+            var entity = await _manager.UserRepository
                 .GetUserByEmail(email, false);
 
             // when email not matched

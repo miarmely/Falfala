@@ -21,12 +21,12 @@ namespace Presentation.Controllers
 
 
         [HttpPost]
-        public IActionResult VerifyEmailAndPassword([FromBody] LoginView loginView)
+        public async Task<IActionResult> VerifyEmailAndPassword([FromBody] LoginView loginView)
         {
             try
             {
                 // verification
-                _manager.LoginService
+                await _manager.LoginService
                     .VerifyEmailAndPassword(loginView.Email, loginView.Password);
 
                 return NoContent();

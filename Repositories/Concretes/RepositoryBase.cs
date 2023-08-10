@@ -21,10 +21,10 @@ namespace Repositories.Concretes
             _context = context;
 
 
-        public void Create(T entity) =>
-            _context
+        public async Task Create(T entity) =>
+            await _context
             .Set<T>()
-            .Add(entity);
+            .AddAsync(entity);
 
 
         public IQueryable<T> FindAll(bool trackChanges) =>

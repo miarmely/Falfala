@@ -8,6 +8,6 @@ namespace Services.Contracts
 {
     public interface ILoginService
     {
-        void VerifyEmailAndPassword(string email, string password);
+        Task VerifyEmailAndPassword(string email, string password);
     }
 }

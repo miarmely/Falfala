@@ -1,4 +1,5 @@
 ﻿using Entities.DataModels;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 using Repositories.EF;
 using System.Linq.Expressions;
@@ -12,8 +13,8 @@ namespace Repositories.Concretes
         { }
 
 
-        public void CreateUser(User user) =>
-            base.Create(user);
+        public async Task CreateUser(User user) =>
+            await base.Create(user);
 
 
         public IQueryable<User> GetAllUsers(bool trackChanges) =>
@@ -31,9 +32,9 @@ namespace Repositories.Concretes
             .FirstOrDefault();
 
 
-        public User? GetUserByEmail(string email, bool trackChanges) =>
-            base.FindWithCondition(u => u.Email.Equals(email), trackChanges)
-            .FirstOrDefault();
+        public async Task<User?> GetUserByEmail(string email, bool trackChanges) =>
+            await base.FindWithCondition(u => u.Email.Equals(email), trackChanges)
+            .FirstOrDefaultAsync();
 
 
         public void UpdateUser(User user) =>
