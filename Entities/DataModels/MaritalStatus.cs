@@ -13,6 +13,6 @@ namespace Entities.DataModels
         public int Id { get; set; }
         
         [Column(TypeName = "varchar(12)")]
-        public string StatusName { get; set; }
+        public string? StatusName { get; set; }
     }
 }

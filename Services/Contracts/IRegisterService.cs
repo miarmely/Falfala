@@ -10,8 +10,8 @@ namespace Services.Contracts
 {
     public interface IRegisterService
     {
-        void CreateUser(User user);
-        public void ControlFormatError(UserView userView);
-        public void ControlConflictError(UserView userView);
+        Task CreateUserAsync(User user);
+        Task ControlFormatErrorAsync(UserView userView);
+        Task ControlConflictErrorAsync(UserView userView);
     }
 }

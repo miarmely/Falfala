@@ -13,26 +13,28 @@ namespace Repositories.Concretes
         { }
 
 
-        public async Task CreateUser(User user) =>
-            await base.Create(user);
+        public void CreateUser(User user) =>
+            base.Create(user);
 
 
-        public IQueryable<User> GetAllUsers(bool trackChanges) =>
-            base.FindAll(trackChanges)
-            .OrderBy(u => u.Id);
+        public async Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges) =>
+            await base.FindAll(trackChanges)
+            .OrderBy(u => u.Id)
+            .ToListAsync();
 
 
-        public IQueryable<User> GetUsersWithCondition(Expression<Func<User, bool>> findExpression, bool trackChanges) =>
-            base.FindWithCondition(findExpression, trackChanges)
-            .OrderBy(u => u.Id);
+        public async Task<IEnumerable<User>> GetUsersWithConditionAsync(Expression<Func<User, bool>> findExpression, bool trackChanges) =>
+            await base.FindWithCondition(findExpression, trackChanges)
+            .OrderBy(u => u.Id)
+            .ToListAsync();
 
 
-        public User? GetUserById(int id, bool trackChanges) =>
-            base.FindWithCondition(u => u.Id == id, trackChanges)
-            .FirstOrDefault();
+        public async Task<User?> GetUserByIdAsync(int id, bool trackChanges) =>
+            await base.FindWithCondition(u => u.Id == id, trackChanges)
+            .FirstOrDefaultAsync();
 
 
-        public async Task<User?> GetUserByEmail(string email, bool trackChanges) =>
+        public async Task<User?> GetUserByEmailAsync(string email, bool trackChanges) =>
             await base.FindWithCondition(u => u.Email.Equals(email), trackChanges)
             .FirstOrDefaultAsync();
 

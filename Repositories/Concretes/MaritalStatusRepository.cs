@@ -1,4 +1,5 @@
 ﻿using Entities.DataModels;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 using Repositories.EF;
 using System;
@@ -16,8 +17,8 @@ namespace Repositories.Concretes
         { }
 
 
-        public MaritalStatus GetMaritalStatusByStatusName(string statusName, bool trackChanges) =>
-            base.FindWithCondition(m => m.StatusName.Equals(statusName), trackChanges)
-            .First();
+        public async Task<MaritalStatus> GetMaritalStatusByStatusNameAsync(string statusName, bool trackChanges) =>
+            await base.FindWithCondition(m => m.StatusName.Equals(statusName), trackChanges)
+            .FirstAsync();
     }
 }

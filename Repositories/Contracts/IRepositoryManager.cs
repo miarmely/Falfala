@@ -10,6 +10,6 @@ namespace Repositories.Contracts
     {
         IUserRepository UserRepository { get; }
         IMaritalStatusRepository MaritalStatusRepository { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

@@ -27,9 +27,8 @@ namespace Repositories.Concretes
         }
 
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
+        public async Task SaveAsync() =>
+            await _context
+            .SaveChangesAsync();
     }
 }

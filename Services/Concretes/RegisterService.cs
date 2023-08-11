@@ -15,25 +15,24 @@ namespace Services.Concretes
             _manager = manager;
 
 
-        public void CreateUser(User user)
+        public async Task CreateUserAsync(User user)
         {
             // create
-            _manager
-                .UserRepository
+            _manager.UserRepository
                 .CreateUser(user);
 
-            _manager.Save();
+            await _manager.SaveAsync();
         }
 
 
-        public void ControlFormatError(UserView userView)
+        public async Task ControlFormatErrorAsync(UserView userView)
         {
             var errorCode = "R-FE-";  // (R)egister - (F)ormat (E)rror
 
             // control
-            ControlTelNo(ref errorCode, userView.TelNo);
-            ControlEmail(ref errorCode, userView.Email);
-            ControlPassword(ref errorCode, userView.Password);
+            errorCode += ControlTelNo(userView.TelNo);
+            errorCode += await ControlEmailAsync(userView.Email);
+            errorCode += await ControlPasswordAsync(userView.Password);
 
             // when telNo, Email Or Passwords Is Wrong
             if (!errorCode.Equals("R-FE-"))
@@ -41,19 +40,17 @@ namespace Services.Concretes
         }
 
 
-        public void ControlConflictError(UserView userView)
+        public async Task ControlConflictErrorAsync(UserView userView)
         {
             // get same employees who have same Email or Telno
-            var entity = _manager
-                .UserRepository
-                .GetUsersWithCondition(u =>
+            var entity = await _manager.UserRepository
+                .GetUsersWithConditionAsync(u =>
                     u.TelNo.Equals(userView.TelNo)
                     || u.Email.Equals(userView.Email)
-                , false)
-                .ToList();
+                , false);
 
             // when Email or TelNo already exists
-            if (entity.Count != 0)
+            if (entity.Count() != 0)
             {
                 var errorMessage = "R-CE-";  // (R)egister - (C)onflict (E)rror
 
@@ -70,38 +67,43 @@ namespace Services.Concretes
         }
 
 
-        private void ControlTelNo(ref string errorCode, string telNo)
+        private string ControlTelNo(string telNo)
         {
-            // telNo length control
-            if (telNo.Length != 11)
-                errorCode += "T";  // T : Telephone
+            // length control
+            return telNo.Length == 11 ? "" : "T";   // T : Telephone
         }
 
 
-        private void ControlEmail(ref string errorCode, string email)
+        private async Task<string> ControlEmailAsync(string email)
         {
-            // when is wrong
-            if (!email.Contains("@"))
-                errorCode += "E";  // E: Email
+            // when not contain "@"
+            return await Task.Run(() =>
+                email.Contains("@") ? "" : "E"
+            );
         }
 
 
-        private void ControlPassword(ref string errorCode, string password)
+        private async Task<string> ControlPasswordAsync(string password)
         {
-            var specialChars = new List<char>() { '!', '*', '.', ',', '@', '?', '_'};
+            var specialChars = new List<char>() { '!', '*', '.', ',', '@', '?', '_' };
 
             // length Control
             if (password.Length < 6  // min len
                 || password.Length > 16)  // max len
-                errorCode += "P";  // P: Password
+                return "P";  // P: Password
 
-            // char type control
-            else if (password.Any(c =>
-                !specialChars.Contains(c)  // special chars
-                && !(c >= 48 && c <= 57)  // numbers
-                && !(c >= 65 && c <= 90)  // big alphabet chars
-                && !(c >= 97 && c <= 122)))  // small alphabet chars)
-                errorCode += "P";  // P: Password
+            // chars control
+            var isCharsTypeInvalid = await Task.Run(() =>
+            {
+                return password.Any(c =>
+                    !specialChars.Contains(c)  // special chars
+                    && !(c >= 48 && c <= 57)  // numbers
+                    && !(c >= 65 && c <= 90)  // big alphabet chars
+                    && !(c >= 97 && c <= 122));  // small alphabet chars)
+            });
+
+
+            return isCharsTypeInvalid ? "P" : "";
         }
     }
 }

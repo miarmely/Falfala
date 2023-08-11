@@ -19,12 +19,15 @@ namespace Services.Concretes
             _manager = manager;
         
             
-        public UserView ConvertToUserView(User user)
+        public async Task<UserView> ConvertToUserViewAsync(User user)
         {
-            return new UserView()
-            {
-                
-            };
+            return await Task.Run(() =>
+                new UserView()
+                {
+                    
+
+                }
+            );
         }
     }
 }

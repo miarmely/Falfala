@@ -10,6 +10,6 @@ namespace Services.Contracts
 {
     public interface IViewConverterService
     {
-        UserView ConvertToUserView(User user);
+        Task<UserView> ConvertToUserViewAsync(User user);
     }
 }

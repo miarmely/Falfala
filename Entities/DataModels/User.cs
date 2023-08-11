@@ -14,22 +14,22 @@ namespace Entities.DataModels
         public int Id { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [Column(TypeName = "char(11)")]
-        public string TelNo { get; set; }
+        public string? TelNo { get; set; }
         
         [Column(TypeName = "varchar(50)")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Column(TypeName = "tinyint")]
         public int Age { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string Job { get; set; }
+        public string? Job { get; set; }
 
         public bool Sex { get; set; }
 
@@ -40,6 +40,6 @@ namespace Entities.DataModels
         public int StatusId { get; set; }
 
         [Column(TypeName = "varchar(16)")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 }

@@ -117,3 +117,4 @@ C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__
 C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\1__API\MiarFalfala\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\1__API\MiarFalfala\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\1__API\MiarFalfala\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\1__API\MiarFalfala\obj\Debug\net7.0\MiarFalfala.MvcApplicationPartsAssemblyInfo.cs

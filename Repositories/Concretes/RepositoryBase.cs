@@ -14,17 +14,15 @@ namespace Repositories.Concretes
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         private readonly RepositoryContext _context;
-        public int Count => _context.Set<T>().Count();
-            
+
 
         public RepositoryBase(RepositoryContext context) =>
             _context = context;
 
-
-        public async Task Create(T entity) =>
-            await _context
-            .Set<T>()
-            .AddAsync(entity);
+        
+        public void Create(T entity) =>
+            _context.Set<T>()
+            .Add(entity);
 
 
         public IQueryable<T> FindAll(bool trackChanges) =>
@@ -40,14 +38,17 @@ namespace Repositories.Concretes
 
 
         public void Delete(T entity) =>
-            _context
-            .Set<T>()
+            _context.Set<T>()
             .Remove(entity);
 
 
         public void Update(T entity) =>
-            _context
-            .Set<T>()
+            _context.Set<T>()
             .Update(entity);
+
+
+        public async Task<int> CountAsync() =>
+            await _context.Set<T>()
+            .CountAsync();
     }
 }

@@ -17,7 +17,7 @@ namespace Services.Concretes
         {
             // get employee matched with email
             var entity = await _manager.UserRepository
-                .GetUserByEmail(email, false);
+                .GetUserByEmailAsync(email, false);
 
             // when email not matched
             if (entity is null)

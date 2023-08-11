@@ -14,11 +14,10 @@ namespace Services.Concretes
             _manager = manager;
 
 
-        public MaritalStatus GetMaritalStatusByStatusName(string statusName, bool trackChanges)
+        public async Task<MaritalStatus> GetMaritalStatusByStatusNameAsync(string statusName, bool trackChanges)
         {
-            return _manager
-                .MaritalStatusRepository
-                .GetMaritalStatusByStatusName(statusName, trackChanges);
+            return await _manager.MaritalStatusRepository
+                .GetMaritalStatusByStatusNameAsync(statusName, trackChanges);
         }
     }
 }

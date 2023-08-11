@@ -9,6 +9,6 @@ namespace Repositories.Contracts
 {
     public interface IMaritalStatusRepository : IRepositoryBase<MaritalStatus>
     {
-        MaritalStatus GetMaritalStatusByStatusName(string statusName, bool trackChanges);
+        Task<MaritalStatus> GetMaritalStatusByStatusNameAsync(string statusName, bool trackChanges);
     }
 }

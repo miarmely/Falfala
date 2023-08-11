@@ -17,30 +17,31 @@ namespace Presentation.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateUser([FromBody] UserView userView)
+        public async Task<IActionResult> CreateUser([FromBody] UserView userView)
         {
             try
             {
                 // format control
-                _manager.RegisterService
-                    .ControlFormatError(userView);
+                await _manager.RegisterService
+                    .ControlFormatErrorAsync(userView);
 
                 // email, telNo already exists?
-                _manager.RegisterService
-                    .ControlConflictError(userView);
+                await _manager.RegisterService
+                    .ControlConflictErrorAsync(userView);
 
                 // userView convert to user
-                var user = _manager.DataConverterService
-                    .ConvertToUser(userView);
+                var user = await _manager.DataConverterService
+                    .ConvertToUserAsync(userView);
 
-                // set StatusId
-                user.StatusId = _manager.MaritalStatusService
-                    .GetMaritalStatusByStatusName(userView.MaritalStatus, false)
-                    .Id;
+                // set marital status id
+                var maritalStatus = await _manager.MaritalStatusService
+                    .GetMaritalStatusByStatusNameAsync(userView.MaritalStatus, false);
+
+                user.StatusId = maritalStatus.Id;
 
                 // create
-                _manager.RegisterService
-                    .CreateUser(user);
+                await _manager.RegisterService
+                    .CreateUserAsync(user);
 
                 userView.Id = user.Id;
 
