@@ -23,11 +23,11 @@ namespace Presentation.Controllers
             {
                 // format control
                 await _manager.RegisterService
-                    .ControlFormatErrorAsync(userView);
+                    .ControlFormatErrorOfUserAsync(userView);
 
                 // email, telNo already exists?
                 await _manager.RegisterService
-                    .ControlConflictErrorAsync(userView);
+                    .ControlConflictErrorOfUserAsync(userView);
 
                 // userView convert to user
                 var user = await _manager.DataConverterService

@@ -11,7 +11,10 @@ namespace Services.Contracts
     public interface IRegisterService
     {
         Task CreateUserAsync(User user);
-        Task ControlFormatErrorAsync(UserView userView);
-        Task ControlConflictErrorAsync(UserView userView);
+        Task ControlFormatErrorOfUserAsync(UserView userView);
+        Task ControlConflictErrorOfUserAsync(UserView userView);
+        bool IsTelNoSyntaxValid(string telNo);
+        Task<bool> IsEmailSyntaxTrueAsync(string email);
+        Task<bool> IsPasswordSyntaxTrueAsync(string password);
     }
 }

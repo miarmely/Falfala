@@ -25,14 +25,14 @@ namespace Services.Concretes
         }
 
 
-        public async Task ControlFormatErrorAsync(UserView userView)
+        public async Task ControlFormatErrorOfUserAsync(UserView userView)
         {
             var errorCode = "R-FE-";  // (R)egister - (F)ormat (E)rror
 
             // control
-            errorCode += ControlTelNo(userView.TelNo);
-            errorCode += await ControlEmailAsync(userView.Email);
-            errorCode += await ControlPasswordAsync(userView.Password);
+            errorCode += IsTelNoSyntaxValid(userView.TelNo)? "" : "T";
+            errorCode += await IsEmailSyntaxTrueAsync(userView.Email)? "" : "E";
+            errorCode += await IsPasswordSyntaxTrueAsync(userView.Password)? "" : "P";
 
             // when telNo, Email Or Passwords Is Wrong
             if (!errorCode.Equals("R-FE-"))
@@ -40,7 +40,7 @@ namespace Services.Concretes
         }
 
 
-        public async Task ControlConflictErrorAsync(UserView userView)
+        public async Task ControlConflictErrorOfUserAsync(UserView userView)
         {
             // get same employees who have same Email or Telno
             var entity = await _manager.UserRepository
@@ -67,30 +67,30 @@ namespace Services.Concretes
         }
 
 
-        private string ControlTelNo(string telNo)
+        public bool IsTelNoSyntaxValid(string telNo)
         {
             // length control
-            return telNo.Length == 11 ? "" : "T";   // T : Telephone
+            return telNo.Length == 11;   // T : Telephone
         }
 
 
-        private async Task<string> ControlEmailAsync(string email)
+        public async Task<bool> IsEmailSyntaxTrueAsync(string email)
         {
             // when not contain "@"
             return await Task.Run(() =>
-                email.Contains("@") ? "" : "E"
+                email.Contains("@")
             );
         }
 
 
-        private async Task<string> ControlPasswordAsync(string password)
+        public async Task<bool> IsPasswordSyntaxTrueAsync(string password)
         {
             var specialChars = new List<char>() { '!', '*', '.', ',', '@', '?', '_' };
 
             // length Control
             if (password.Length < 6  // min len
                 || password.Length > 16)  // max len
-                return "P";  // P: Password
+                return false;  // P: Password
 
             // chars control
             var isCharsTypeInvalid = await Task.Run(() =>
@@ -102,8 +102,7 @@ namespace Services.Concretes
                     && !(c >= 97 && c <= 122));  // small alphabet chars)
             });
 
-
-            return isCharsTypeInvalid ? "P" : "";
+            return isCharsTypeInvalid? false : true;
         }
     }
 }
@@ -120,7 +119,6 @@ namespace Services.Concretes
 
 /* ----------------- FORMAT ERROR CODES -----------------
  * R-FE     -> (R)egister - (F)ormat (E)rror
- * 
  * R-FE-T   -> (T)elephone
  * R-FE-TE  -> (T)elephone + (E)mail
  * R-FE-TP  -> (T)elephone + (P)assword
@@ -128,5 +126,4 @@ namespace Services.Concretes
  * R-FE-E   -> (E)mail
  * R-FE-EP  -> (E)mail + (P)assword
  * R-FE-P   -> (P)assword
-
 */

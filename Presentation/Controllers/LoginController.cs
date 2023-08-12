@@ -26,7 +26,8 @@ namespace Presentation.Controllers
             try
             {
                 // verification
-                await _manager.LoginService
+                await _manager
+                    .LoginService
                     .VerifyEmailAndPassword(loginView.Email, loginView.Password);
 
                 return NoContent();
@@ -38,9 +39,47 @@ namespace Presentation.Controllers
                 if (ex.Message.Equals("L-VE-E")
                     || ex.Message.Equals("L-VE-P"))
                     return NotFound(ex.Message);
-                
+
                 // unexpected errors
-                return StatusCode(500, "Server Error");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+
+        [HttpPost("sendMail")]
+        public async Task<IActionResult> SendMailAsync([FromBody] IForgetMyPasswordView view)
+        {
+            try
+            {
+                // when email format wrong
+                if (!await _manager.RegisterService
+                    .IsEmailSyntaxTrueAsync(view.Email))
+                    return BadRequest("FE-E");
+
+                // send mail and change password
+                await _manager.LoginService
+                    .VerifyEmail(view.Email);
+
+                // send mail
+                await _manager.MailService
+                    .SendMailAsync(new MailView()
+                    {
+                        To = view.Email,
+                        Subject = "Email Verification",
+                        Body = @"<b>This</b> is my <a href='https://google.com'>Link</a>"
+                    });
+
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                // when mail is wrong
+                if (ex.Message.Equals("VE-E"))
+                    return NotFound("VE-E");
+
+                // for unexpected errors
+                return StatusCode(500, ex.Message);
             }
         }
     }

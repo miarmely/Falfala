@@ -1,6 +1,5 @@
 using Falfala.Extensions;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // add service
@@ -14,6 +13,7 @@ builder.Services.AddControllers()
 builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureMailSettingsConfig(builder.Configuration);
 
 var app = builder.Build();
 

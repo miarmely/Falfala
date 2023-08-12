@@ -13,5 +13,6 @@ namespace Services.Contracts
         IDataConverterService DataConverterService { get; }
         IViewConverterService ViewConverterService { get; }
         ILoginService LoginService { get;  }
+        IMailService MailService { get; }
     }
 }
