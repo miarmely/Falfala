@@ -1,6 +1,5 @@
 using Falfala_MVC.Extension;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 #region add service extension

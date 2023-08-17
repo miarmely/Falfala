@@ -61,6 +61,7 @@ $(function () {
             contentType: "application/json",
             success: async function () {
                 updateResultLabel("#td_resultLabel", "#btn_save", "<b style= 'color:green'>Başarıyla</b> Değiştirildi", 3);
+                $("form")[0].reset();  // reset inputs
             },
             error: async function (response) {
                 updateResultLabel("#td_resultLabel", "#btn_save", `<b style= 'color:red' ${response.responseText}</b>`, 3);
