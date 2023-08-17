@@ -8,7 +8,7 @@ namespace Services.Contracts
 {
     public interface IServiceManager
     {
-        IRegisterService RegisterService { get; }
+        IUserService UserService { get; }
         IMaritalStatusService MaritalStatusService { get; }
         IDataConverterService DataConverterService { get; }
         IViewConverterService ViewConverterService { get; }

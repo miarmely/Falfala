@@ -24,7 +24,7 @@ namespace Services.Concretes
                 new User()
                 {
                     Id = Convert.ToInt32(userView.Id),
-                    FullName = userView.FullName,
+                    FirstName = userView.FirstName,
                     LastName = userView.LastName,
                     TelNo = userView.TelNo,
                     Email = userView.Email,

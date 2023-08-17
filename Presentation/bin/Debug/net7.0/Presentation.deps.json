@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "Presentation/1.0.0": {
         "dependencies": {
+          "Entities": "1.0.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "7.0.10",
           "Services": "1.0.0"
         },
@@ -809,7 +810,6 @@
       },
       "Services/1.0.0": {
         "dependencies": {
-          "Entities": "1.0.0",
           "MailKit": "4.1.0",
           "Microsoft.SqlServer.SqlManagementObjects": "170.18.0",
           "Repositories": "1.0.0"

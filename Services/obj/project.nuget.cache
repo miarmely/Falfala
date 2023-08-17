@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+eATshEP4cDWJ0M1B7K86IwvUoqwe/T23HW4kx2whO1XGIGepGF+CdvVsPVonvhOEiBVkc4Qb3H0Cj7A5U8BIg==",
+  "dgSpecHash": "mQQBb/xptgdgCVY9AQOv7TKdJE7ZVKT6y7AzQS8GkVV6Mxn9XYHRe+3ftwNZfqqWymU+7a0SzFb5OWnOIKC3tw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mac\\Desktop\\SOFTWARE\\1__Software_Languages\\1__C#\\2__API\\1__Projects\\2__Falfala\\1__API\\Services\\Services.csproj",
+  "projectFilePath": "C:\\Users\\Mac\\Desktop\\SOFTWARE\\1__Software_Languages\\1__C#\\2__API\\1__Projects\\2__Falfala\\Services\\Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mac\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Mac\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

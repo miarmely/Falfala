@@ -9,7 +9,7 @@ namespace Services.Concretes
     public class ServiceManager : IServiceManager
     {
         
-        private readonly Lazy<IRegisterService> _registerService;
+        private readonly Lazy<IUserService> _userService;
         
         private readonly Lazy<IDataConverterService> _dataConverterService;
 
@@ -20,7 +20,7 @@ namespace Services.Concretes
         private readonly Lazy<ILoginService> _loginService;
 
         private readonly Lazy<IMailService> _mailService;
-        public IRegisterService RegisterService => _registerService.Value;
+        public IUserService UserService => _userService.Value;
         public IDataConverterService DataConverterService => _dataConverterService.Value;
         public IViewConverterService ViewConverterService => _viewConverterService.Value;
         public IMaritalStatusService MaritalStatusService => _maritalStatusService.Value;
@@ -30,7 +30,7 @@ namespace Services.Concretes
 
         public ServiceManager(IRepositoryManager manager, IOptions<MailSettingsConfig> mailSettings)
         {
-            _registerService = new Lazy<IRegisterService>(() => new RegisterService(manager));
+            _userService = new Lazy<IUserService>(() => new UserService(manager));
             _dataConverterService = new Lazy<IDataConverterService>(() => new DataConverterService(manager));
             _viewConverterService = new Lazy<IViewConverterService>(() => new ViewConverterService(manager));
             _maritalStatusService = new Lazy<IMaritalStatusService>(() => new MaritalStatusService(manager));
