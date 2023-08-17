@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Falfala_MVC.props" />
+</Project>

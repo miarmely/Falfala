@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="170.18.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
   </ItemGroup>
 

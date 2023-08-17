@@ -1,0 +1,36 @@
+﻿@model Entities.DataModels.User
+
+
+<div id="div_input" class="input_table">
+	<form>
+		<table>
+			<thead>
+				<tr><th>FALFALA</th></tr>
+				<tr><th>ŞİFRE YENİLEME</th></tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="password" id="inpt_newPassword1" placeholder="Yeni Şifre" required></td>
+				</tr>
+				<tr>
+					<td><input type="password" id="inpt_newPassword2" placeholder="Tekrar Yeni Şifre" required></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<button type="button" id="btn_showPasswords">
+							<img src="~/pictures/visible.png" width="17" height="17" alt="Şifreleri Göster" title="Şifreleri Göster"/>
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td id="td_resultLabel" class="td_resultLabel"></td>
+				</tr>
+				<tr>
+					<td><button type="submit" id="btn_save" class="btn_hover" value="@Model.Email">Kaydet</button></td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+</div>
