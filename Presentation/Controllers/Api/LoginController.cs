@@ -12,72 +12,95 @@ namespace Presentation.Controllers.Api
     {
         private readonly IServiceManager _manager;
 
-
         public LoginController(IServiceManager manager) =>
             _manager = manager;
 
 
         [HttpPost]
-        public async Task<IActionResult> VerifyEmailAndPassword([FromBody] LoginView loginView)
+        public async Task<IActionResult> VerifyEmailAndPassword([FromBody] UserView viewModel)
         {
             try
             {
-                // verification
-                await _manager.LoginService
-                    .VerifyEmailAndPassword(loginView.Email, loginView.Password);
+				#region email format control
+				if (!await _manager.UserService
+					.IsEmailSyntaxTrueAsync(viewModel.Email))
+					return BadRequest("FE-E");
+				#endregion
 
-                return NoContent();
+				#region password format control
+				if (!await _manager.UserService
+					.IsPasswordSyntaxTrueAsync(viewModel.Password))
+					return BadRequest("FE-P");
+				#endregion
+
+				#region verification
+				await _manager.LoginService
+                    .VerifyEmailAndPassword(viewModel.Email, viewModel.Password);
+				#endregion
+
+				return NoContent();
             }
 
             catch (Exception ex)
             {
-                // when email or password not matched
-                if (ex.Message.Equals("VE-E")
-                    || ex.Message.Equals("VE-P"))
-                    return NotFound(ex.Message);
+				#region email or password format error
+				if (ex.Message.StartsWith("FE"))
+					return NotFound(ex.Message);
+				#endregion
 
-                // unexpected errors
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
+				#region email or password not matched
+				if (ex.Message.StartsWith("VE"))
+                    return NotFound(ex.Message);
+				#endregion
+
+				#region unexpected error
+				return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+				#endregion
+			}
+		}
 
 
         [HttpPost("sendMail")]
-        public async Task<IActionResult> SendMailAsync([FromBody] IForgetMyPasswordView view)
+        public async Task<IActionResult> SendMailAsync([FromBody] UserView viewModel)
         {
             try
             {
-                // when email format wrong
+                #region email format control
                 if (!await _manager.UserService
-                    .IsEmailSyntaxTrueAsync(view.Email))
+                    .IsEmailSyntaxTrueAsync(viewModel.Email))
                     return BadRequest("FE-E");
+				#endregion
 
-                // send mail and change password
-                await _manager.LoginService
-                    .VerifyEmail(view.Email);
+				#region verify email
+				await _manager.LoginService
+					.VerifyEmail(viewModel.Email);
+				#endregion
 
-                // send mail
-                await _manager.MailService
-                    .SendMailAsync(new MailView()
-                    {
-                        To = view.Email,
-                        Subject = "Falfala - Şifre Yenileme",
-                        Body = @"Yeni bir şifre oluşturmak için lütfen aşağıdaki linke tıklayınız: <br>
-                                <a href='http://127.0.0.1:5500/html/newPassword.html'>Link</a>"
-                    });
+				#region send mail
+				await _manager.MailService
+					.SendMailAsync(new MailView()
+					{
+						To = viewModel.Email,
+						Subject = "Falfala - Şifre Yenileme",
+						Body = @$"Yeni bir şifre oluşturmak için lütfen aşağıdaki linke tıklayınız: <br>
+                                <a href='https://localhost:7131/refreshPassword/index/{viewModel.Email}'>Yeni Şifre Oluştur</a>"
+					});
+				#endregion
 
-                return NoContent();
+				return NoContent();
             }
 
             catch (Exception ex)
             {
-                // when mail is wrong
-                if (ex.Message.Equals("VE-E"))
-                    return NotFound("VE-E");
+				#region email format wrong
+				if (ex.Message.Equals("VE-E"))
+					return NotFound("VE-E");
+				#endregion
 
-                // for unexpected errors
-                return StatusCode(500, ex.Message);
-            }
+				#region unexpected errors
+				return StatusCode(500, ex.Message);
+				#endregion
+			}
         }
     }
 }

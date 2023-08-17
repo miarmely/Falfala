@@ -24,21 +24,21 @@ namespace Services.Concretes
 
             #region set "Sender"
             // set "From"
-            mimeMessage.From.Add(new MailboxAddress(
-                    _mailConfig.DisplayName, _mailConfig.From));
+            mimeMessage.From
+                .Add(new MailboxAddress(_mailConfig.DisplayName, _mailConfig.From));
 
             // set "Sender"
             mimeMessage.Sender = new MailboxAddress(_mailConfig.DisplayName, _mailConfig.From);
             #endregion
 
             #region set "To"
-            // set "To" if in List
+            // more than one
             if (mailView.ToAsList is not null)
                 foreach (var mail in mailView.ToAsList)
-                    mimeMessage.To.Add(
-                        MailboxAddress.Parse(mail));
+                    mimeMessage.To
+                        .Add(MailboxAddress.Parse(mail));
             
-            // set "To"
+            // one person
             else
                 mimeMessage.To.Add(
                     MailboxAddress.Parse(mailView.To));

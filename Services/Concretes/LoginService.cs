@@ -38,27 +38,6 @@ namespace Services.Concretes
 
             return entity;
         }
-
-
-        private async Task SendMailAsync(string from, string to, string subject, string body)
-        {
-            //set mail message
-            var mailMessage = new MailMessage(from, to);
-            mailMessage.Subject = subject;
-            //mailMessage.IsBodyHtml = true;
-            mailMessage.Body = body;
-
-            // set mail settings
-            var smtpClient = new SmtpClient();
-            smtpClient.Host = "smtp.gmail.com";
-            smtpClient.Port = 587;
-            smtpClient.EnableSsl = true;
-            smtpClient.Credentials = new NetworkCredential("kamondosteam6@gmail.com", "gamarcoba08");
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            
-            // send mail
-            await smtpClient.SendMailAsync(mailMessage);
-        }
     }
 }
 /* ------------------ LOGIN ERROR CODE ------------------

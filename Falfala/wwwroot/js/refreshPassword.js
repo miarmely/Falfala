@@ -49,8 +49,8 @@ $(function () {
         }
 
         $.ajax({
-            method: "PUT",
-            url: "api/user/update",
+            method: "Delete",
+            url: "api/user",
             data: JSON.stringify(data),
             contentType: "application/json",
             success: async function () {

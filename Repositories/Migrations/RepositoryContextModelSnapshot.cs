@@ -31,7 +31,6 @@ namespace Repositories.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
                     b.Property<string>("StatusName")
-                        .IsRequired()
                         .HasColumnType("varchar(12)");
 
                     b.HasKey("Id");
@@ -81,23 +80,18 @@ namespace Repositories.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("FullName")
-                        .IsRequired()
+                    b.Property<string>("FirstName")
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Job")
-                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("varchar(16)");
 
                     b.Property<bool>("Sex")
@@ -107,7 +101,6 @@ namespace Repositories.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("TelNo")
-                        .IsRequired()
                         .HasColumnType("char(11)");
 
                     b.HasKey("Id");

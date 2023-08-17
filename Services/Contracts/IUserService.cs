@@ -11,7 +11,9 @@ namespace Services.Contracts
     public interface IUserService
     {
         Task CreateUserAsync(User user);
-        Task ControlFormatErrorOfUserAsync(UserView userView);
+        Task<User?> GetUserByEmailAsync(string email, bool trackChanges); 
+        Task UpdatePasswordByEmailAsync(UserView viewModel);
+		Task ControlFormatErrorOfUserAsync(UserView userView);
         Task ControlConflictErrorOfUserAsync(UserView userView);
         bool IsTelNoSyntaxValid(string telNo);
         Task<bool> IsEmailSyntaxTrueAsync(string email);

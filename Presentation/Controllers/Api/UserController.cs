@@ -7,7 +7,7 @@ using Services.Contracts;
 namespace Presentation.Controllers.Api
 {
 	[ApiController]
-	[Route("api/register")]
+	[Route("api/user")]
 	public class UserController : ControllerBase
 	{
 		private readonly IServiceManager _manager;
@@ -52,8 +52,8 @@ namespace Presentation.Controllers.Api
 			catch (Exception ex)
 			{
 				// when format or conflict error occured
-				if (ex.Message.StartsWith("R-FE-")  // format error
-					|| ex.Message.StartsWith("R-CE-"))  // conflict error
+				if (ex.Message.StartsWith("FE-")  // format error
+					|| ex.Message.StartsWith("CE-"))  // conflict error
 					return BadRequest(ex.Message);
 
 				return NotFound(ex.Message);
@@ -61,10 +61,29 @@ namespace Presentation.Controllers.Api
 		}
 
 
-		[HttpGet]
-		public IActionResult Trying()
+		[HttpPut]
+		public async Task<IActionResult> UpdatePassword([FromBody] UserView viewModel)
 		{
-			return Ok();
+			try
+			{
+				#region update
+				 await _manager.UserService
+					.UpdatePasswordByEmailAsync(viewModel);
+				#endregion
+
+				return NoContent();
+			}
+			catch (Exception ex)
+			{
+				#region when email not matched
+				if (ex.Message.Equals("VE-E"))
+					return NotFound("VE_E");
+				#endregion
+
+				#region unexpected error
+				return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+				#endregion
+			}
 		}
 	}
 }
