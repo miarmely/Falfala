@@ -9,15 +9,16 @@ namespace Services.Concretes
     {
         private readonly IRepositoryManager _manager;
 
-
         public MaritalStatusService(IRepositoryManager manager) =>
             _manager = manager;
 
+		public async Task<MaritalStatus> GetMaritalStatusByNameAsync(string statusName, bool trackChanges) =>
+            await _manager.MaritalStatusRepository
+                .GetMaritalStatusByNameAsync(statusName, trackChanges);
+        
 
-        public async Task<MaritalStatus> GetMaritalStatusByStatusNameAsync(string statusName, bool trackChanges)
-        {
-            return await _manager.MaritalStatusRepository
-                .GetMaritalStatusByStatusNameAsync(statusName, trackChanges);
-        }
-    }
+        public async Task<MaritalStatus> GetMaritalStatusByIdAsync(int statusId, bool trackChanges) => 
+            await _manager.MaritalStatusRepository
+                .GetMaritalStatusByIdAsync(statusId, trackChanges);
+	}
 }

@@ -50,7 +50,7 @@ $(function () {
         // password control
         if (data.password.length < 6
             || data.password.length > 16) {
-            updateResultLabel("#td_resultLabel", "#btn_save", "Yeni şifreniz <b style= 'color:red'>6</b> karakterden büyük; <b style= 'color:red'>16</b> karakterden küçük olmalıdır.", 4)
+            updateResultLabel("#td_resultLabel", "#btn_save", "Yeni şifreniz <b style= 'color:red'>6</b> karakterden büyük; <b style= 'color:red'>16</b> karakterden küçük olmalıdır", 4)
             return;
         }
 

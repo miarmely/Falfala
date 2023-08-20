@@ -9,6 +9,7 @@ namespace Services.Contracts
 {
     public interface IMaritalStatusService
     {
-        Task<MaritalStatus> GetMaritalStatusByStatusNameAsync(string statusName, bool trackChanges);
-    }   
+        Task<MaritalStatus> GetMaritalStatusByNameAsync(string statusName, bool trackChanges);
+        Task<MaritalStatus> GetMaritalStatusByIdAsync(int statusId, bool trackChanges);
+	}   
 }

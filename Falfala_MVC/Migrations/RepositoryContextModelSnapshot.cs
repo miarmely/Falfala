@@ -8,7 +8,7 @@ using Repositories.EF;
 
 #nullable disable
 
-namespace Repositories.Migrations
+namespace Falfala_MVC.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot

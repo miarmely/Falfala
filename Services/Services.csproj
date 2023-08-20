@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="170.18.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.3" />
   </ItemGroup>
 
   <ItemGroup>

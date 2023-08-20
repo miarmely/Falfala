@@ -21,7 +21,7 @@ namespace Services.Concretes
 			var status = modelView.MaritalStatus == null ?
 				default
 				: await _manager.MaritalStatusRepository
-				 .GetMaritalStatusByStatusNameAsync(modelView.MaritalStatus, false);
+				 .GetMaritalStatusByNameAsync(modelView.MaritalStatus, false);
 			#endregion
 
 			return new User()

@@ -1,0 +1,56 @@
+2023-08-20 09:36:59.6499  INFO  Verification Error - Password -> 1234567
+2023-08-20 10:20:11.2283  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234567
+2023-08-20 10:22:07.1232  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234567
+2023-08-20 10:22:14.7267  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234567
+2023-08-20 12:14:04.5987  INFO  Format Error - Email -> email:miarmelygmail.com
+2023-08-20 12:14:36.6921  INFO  Format Error - Email -> email:miarmelygmail.com
+2023-08-20 12:14:46.9887  INFO  Format Error - Password -> email:miarmely@gmail.com password: 1234
+2023-08-20 12:15:05.7306  INFO  Format Error - Email -> email:miarmelygmail.com
+2023-08-20 12:15:23.0481  INFO  Verification Error - Email - iarmely@gmail.com
+2023-08-20 12:16:09.3242  INFO  Verification Error - Email -> email:iarmely@gmail.com
+2023-08-20 12:16:47.0069  INFO  Verification Error - Email -> email:iarmely@gmail.com
+2023-08-20 12:16:54.5759  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234567777
+2023-08-20 12:17:07.3662  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234567
+2023-08-20 12:18:04.5677  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234568
+2023-08-20 12:18:15.1446  INFO  Verification Error - Email -> email:iarmely@gmail.com
+2023-08-20 12:18:20.4313  INFO  Format Error - Email -> email:miarmelygmail.com
+2023-08-20 12:18:26.8351  INFO  Format Error - Password -> email:miarmely@gmail.com password: 12345
+2023-08-20 18:41:22.2769  INFO  Format Error - Email -> email:miarmelygmail.com
+2023-08-20 18:41:30.1558  INFO  Format Error - Email -> email:miarmely@gmailcom
+2023-08-20 18:41:36.0400  INFO  Verification Error - Email -> email:miarmely@.gmailcom
+2023-08-20 18:41:43.8360  INFO  Verification Error - Email -> email:miarmely.@gmail.com
+2023-08-20 18:41:50.4942  INFO  Format Error - Email -> email:miarmely.@gmailcom
+2023-08-20 18:42:55.0981  INFO  Format Error - Password -> email:miarmely@gmail.com password:12356
+2023-08-20 18:42:57.7973  INFO  Format Error - Password -> email:miarmly@gmail.com password:12356
+2023-08-20 18:43:05.4504  INFO  Format Error - Email -> email:miarmely.@gmailcom
+2023-08-20 18:43:10.6139  INFO  Format Error - Password -> email:miarmely@gmail.com password:12356
+2023-08-20 18:43:18.1434  INFO  Verification Error - Email -> email:miarmely@gmail.com0
+2023-08-20 18:43:23.2896  INFO  Verification Error - Password -> email:miarmely@gmail.com password:1234568
+2023-08-20 18:43:29.0606  INFO  Verification Error - Email -> email:miarmely@gmail.com8
+2023-08-20 18:44:37.3508  INFO  Format Error - Telephone 
+2023-08-20 18:47:00.6771  INFO  Format Error - Telephone 
+2023-08-20 18:47:24.8079  INFO  Format Error - Telephone 
+2023-08-20 18:47:42.5743  INFO  Format Error - Telephone Email 
+2023-08-20 18:47:46.9438  INFO  Format Error - Telephone Email 
+2023-08-20 18:47:58.8804  INFO  Format Error - Telephone Email Password 
+2023-08-20 18:48:08.1087  INFO  Format Error - Telephone Email Password 
+2023-08-20 18:48:12.2021  INFO  Format Error - Telephone Email 
+2023-08-20 18:48:15.7533  INFO  Format Error - Telephone Email 
+2023-08-20 18:48:18.4475  INFO  Format Error - Telephone Email Password 
+2023-08-20 18:49:27.6301  INFO  Format Error - Telephone Email Password 
+2023-08-20 18:49:31.8329  INFO  Format Error - Telephone Email Password 
+2023-08-20 18:49:41.0011  INFO  Format Error - Telephone Email Password 
+2023-08-20 18:50:06.8039  INFO  Format Error - Email Password 
+2023-08-20 18:50:27.0792  INFO  Format Error - Password 
+2023-08-20 18:50:41.2554  INFO  Format Error - 
+2023-08-20 18:50:50.9850  INFO  Format Error - 
+2023-08-20 18:51:46.5718  INFO  Verification Error - Email -> email:miarmely@gmail.om
+2023-08-20 18:51:51.9557  INFO  Verification Error - Email -> email:miarmely@gmail.om
+2023-08-20 18:52:45.4144  INFO  Verification Error - Email -> email:miarmely@gmail.om
+2023-08-20 18:52:53.6137  INFO  Verification Error - Email -> email:miarmely@gmail.om
+2023-08-20 18:54:07.3488  INFO  Verification Error - Email -> email:miarmely@gmail.om
+2023-08-20 18:54:42.9109  INFO  Format Error - Email -> email:miarmely@gmailcom
+2023-08-20 18:57:06.9012  INFO  Format Error - Email -> email:miarmely@gmailcom
+2023-08-20 18:58:44.5542  INFO  Format Error - Email -> email:miarmely@gmailcom
+2023-08-20 18:58:52.1768  INFO  Format Error - Email -> email:miarmely@gmailcom
+2023-08-20 19:00:39.7732  INFO  Verification Error - Email -> email:miamely@gmail.com

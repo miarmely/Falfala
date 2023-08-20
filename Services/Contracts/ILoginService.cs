@@ -1,16 +1,15 @@
 ﻿using Entities.DataModels;
 using Entities.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+
 
 namespace Services.Contracts
 {
     public interface ILoginService
     {
-        Task VerifyEmailAndPassword(string email, string password);
-        Task<User> VerifyEmail(string email);
-    }
+        Task VerifyEmailAndPasswordAsync(UserView viewModel);
+		Task EmailOrPasswordFormatControlAsync([Optional] string email, [Optional] string password);
+		Task<User> VerifyEmailAsync(string email);
+		Task SendMailAsync(UserView viewModel);
+	}
 }

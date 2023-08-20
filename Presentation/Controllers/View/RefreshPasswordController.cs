@@ -19,7 +19,7 @@ namespace Presentation.Controllers.View
             {
 				#region email format control
 				if (!await _manager.UserService
-                    .IsEmailSyntaxTrueAsync(email))
+                    .IsEmailSyntaxValidAsync(email))
                     return BadRequest("FE-E");
 				#endregion
 

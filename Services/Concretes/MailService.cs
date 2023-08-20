@@ -13,10 +13,13 @@ namespace Services.Concretes
     {
         private readonly MailSettingsConfig _mailConfig;
 
+        private readonly ILoggerService _logger;
 
-        public MailService(IOptions<MailSettingsConfig> config) =>
-            _mailConfig = config.Value;
-
+        public MailService(IOptions<MailSettingsConfig> config, ILoggerService logger)
+        {
+			_mailConfig = config.Value;
+            _logger = logger;
+		}
 
         public async Task SendMailAsync(MailView mailView)
         {
@@ -35,8 +38,8 @@ namespace Services.Concretes
             // more than one
             if (mailView.ToAsList is not null)
                 foreach (var mail in mailView.ToAsList)
-                    mimeMessage.To
-                        .Add(MailboxAddress.Parse(mail));
+                    mimeMessage.To.Add(
+                        MailboxAddress.Parse(mail));
             
             // one person
             else
@@ -55,26 +58,59 @@ namespace Services.Concretes
             #endregion
 
             #region send mail
-            // send mail
             using (var smtpClient = new SmtpClient())
             {
-                // connect with TLS  ->  (NEW Version) Encryption Type
-                if (_mailConfig.UseTLS)
-                    await smtpClient.ConnectAsync(_mailConfig.Host, _mailConfig.Port, SecureSocketOptions.StartTls);
+                try
+                {
+                    #region connect with TLS  ->  (NEW Version) Encryption Type
+					if (_mailConfig.UseTLS)
+                        await smtpClient.ConnectAsync(_mailConfig.Host, _mailConfig.Port, SecureSocketOptions.StartTls);
+					#endregion
 
-                // connect with SSL  ->  (OLD Version) Encryption Type
-                else if (_mailConfig.UseSSL)
-                    await smtpClient.ConnectAsync(_mailConfig.Host, _mailConfig.Port, SecureSocketOptions.SslOnConnect);
+					#region connect with SSL  ->  (OLD Version) Encryption Type
+					else if (_mailConfig.UseSSL)
+						await smtpClient.ConnectAsync(_mailConfig.Host, _mailConfig.Port, SecureSocketOptions.SslOnConnect);
+					#endregion
 
-                // authentication
-                await smtpClient.AuthenticateAsync(
-                    _mailConfig.Username, _mailConfig.Password);
+					#region authentication
+					await smtpClient.AuthenticateAsync(
+						_mailConfig.Username, _mailConfig.Password);
+					#endregion
 
-                // send mail
-                await smtpClient.SendAsync(mimeMessage);
-                await smtpClient.DisconnectAsync(true);
-            }
+					#region send mail
+					await smtpClient.SendAsync(mimeMessage);
+					await smtpClient.DisconnectAsync(true);
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    #region when sending email to one person
+                    if (mailView.ToAsList is null)
+                    {
+                        _logger.LogError($"Error Occured When Sending Email. -> email:{mailView.To}");
+                        throw new Exception("EE");
+					}
+					#endregion
+
+					#region when sending email to more than one person
+					else
+					{
+						var emailListAsString = "";
+
+						//  transport emails in list to string
+						mailView.ToAsList.ForEach(email =>
+							emailListAsString += $"{email} ");
+
+						_logger.LogError($"Error Occured When Sending Email -> emails:{emailListAsString}");
+                        throw new Exception("EE");
+                    }
+					#endregion
+				}
+			}
             #endregion
         }
     }
 }
+/* ---------------- Error Codes ---------------- 
+ * EE -> Email Error
+*/

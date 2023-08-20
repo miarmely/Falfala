@@ -1,8 +1,11 @@
-﻿using Entities.DataModels;
+﻿using Entities.ConfigModels;
+using Entities.DataModels;
 using Entities.ViewModels;
+using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
 using Repositories.Contracts;
 using Services.Contracts;
-
+using System.Runtime.CompilerServices;
 
 namespace Services.Concretes
 {
@@ -10,145 +13,241 @@ namespace Services.Concretes
 	{
 		private readonly IRepositoryManager _manager;
 
-		public UserService(IRepositoryManager manager) =>
-			_manager = manager;
+		private readonly ILoggerService _logger;
 
-		public async Task CreateUserAsync(User user)
+		private readonly IDataConverterService _dataConverterService;
+
+		private readonly IViewConverterService _viewConverterService;
+
+		private readonly IMaritalStatusService _maritalStatusService;
+
+		private readonly UserSettingsConfig _userSettings;
+
+		public UserService(IRepositoryManager manager
+			, ILoggerService logger
+			, IDataConverterService dataConverterService
+			, IViewConverterService viewConverterService
+			, IMaritalStatusService maritalStatusService
+			, IOptions<UserSettingsConfig> userSettings)
 		{
-			// create
+			_manager = manager;
+			_logger = logger;
+			_dataConverterService = dataConverterService;
+			_viewConverterService = viewConverterService;
+			_maritalStatusService = maritalStatusService;
+			_userSettings = userSettings.Value;
+		}
+
+		public async Task CreateUserAsync(UserView viewModel)
+		{
+			#region format and conflict error control
+			await ControlFormatErrorOfUserAsync(viewModel);
+			await ControlConflictErrorOfUserAsync(viewModel);
+			#endregion
+
+			#region convert viewModel to dataModel
+			var user = await _dataConverterService
+				.ConvertToUserAsync(viewModel);
+			#endregion
+
+			#region add statusId
+			// set marital status id
+			var maritalStatus = await _maritalStatusService
+				.GetMaritalStatusByNameAsync(viewModel.MaritalStatus, false);
+
+			user.StatusId = maritalStatus.Id;
+			#endregion
+
+			#region create user
 			_manager.UserRepository
 				.CreateUser(user);
 
 			await _manager.SaveAsync();
+
+			// add id
+			viewModel.Id = user.Id;
+			#endregion
 		}
 
 		public async Task<User?> GetUserByEmailAsync(string email, bool trackChanges)
 		{
-			// get employee
+			#region get employee
 			var entity = await _manager.UserRepository
 				.GetUserByEmailAsync(email, trackChanges);
+			#endregion
 
-			_ = entity ?? throw new Exception("VE-E");
+			#region when employee not matched
+			if (entity == null)
+			{
+				_logger.LogInfo($"Verification Error - Email -> email:{email}");
+				throw new Exception("VE-E");
+			}
+			#endregion
 
 			return entity;
 		}
 
-		public async Task UpdatePasswordByEmailAsync(UserView viewModel)
+		public async Task<UserView> UpdatePasswordAsync(UserView viewModel)
 		{
-			#region get user by email
-			var user = await _manager.UserRepository
-				.GetUserByEmailAsync(viewModel.Email, false);
+			var user = await GetUserByEmailAsync(viewModel.Email, false);
 
-			// when email not matched
-			_ = user ?? throw new Exception("VE-E");
-			#endregion
-
-			#region update password
+			#region update password of user
 			user.Password = viewModel.Password;
-			
-			// update
+
 			_manager.UserRepository
 				.UpdateUser(user);
 
 			await _manager.SaveAsync();
 			#endregion
+
+			#region get new userView
+			var userView = await _viewConverterService
+				.ConvertToUserViewAsync(user);
+			#endregion
+
+			return userView;
 		}
 
 		public async Task ControlFormatErrorOfUserAsync(UserView userView)
 		{
-			var errorCode = "FE-"; // (R)egister - (F)ormat (E)rror
+			#region set error code
+			var shortErrorCode = "FE-";
+			var longErrorCode = "Format Error - ";
 
-			// control
-			errorCode += IsTelNoSyntaxValid(userView.TelNo) ? "" : "T";
-			errorCode += await IsEmailSyntaxTrueAsync(userView.Email) ? "" : "E";
-			errorCode += await IsPasswordSyntaxTrueAsync(userView.Password) ? "" : "P";
+			// control tel no
+			if (!IsTelNoSyntaxValid(userView.TelNo))
+			{
+				shortErrorCode += "T";
+				longErrorCode += "Telephone ";
+			}
 
-			// when telNo, Email Or Passwords Is Wrong
-			if (!errorCode.Equals("FE-"))
-				throw new Exception(errorCode);
+			// control email
+			if (!await IsEmailSyntaxValidAsync(userView.Email))
+			{
+				shortErrorCode += "E";
+				longErrorCode += "Email ";
+			}
+
+			// control password
+			if (!await IsPasswordSyntaxValidAsync(userView.Password))
+			{
+				shortErrorCode += "P";
+				longErrorCode += "Password ";
+			}
+			#endregion
+
+			#region when telNo, email or passwords is invalid
+			if (!shortErrorCode.Equals("FE-"))
+			{
+				_logger.LogInfo(longErrorCode);
+				throw new Exception(shortErrorCode);
+			}
+			#endregion
 		}
 
 		public async Task ControlConflictErrorOfUserAsync(UserView userView)
 		{
-			// get same employees who have same Email or Telno
+			#region get employees that matched same email or telNo
 			var entity = await _manager.UserRepository
 				.GetUsersWithConditionAsync(u =>
 					u.TelNo.Equals(userView.TelNo)
 					|| u.Email.Equals(userView.Email)
 				, false);
+			#endregion
 
-			// when Email or TelNo already exists
+			#region when email or telNo already exists
 			if (entity.Count() != 0)
 			{
-				var errorMessage = "CE-";  // (R)egister - (C)onflict (E)rror
+				var shortErrorCode = "CE-";
+				var longErrorCode = "Conflict Error - ";
 
-				// when TelNo already exists
+				// control TelNo
 				if (entity.Any(u => u.TelNo.Equals(userView.TelNo)))
-					errorMessage += "T";
-
-				// when Email already exists
+				{
+					shortErrorCode += "T";
+					longErrorCode += "Telephone ";
+				}
+					
+				// control Email
 				if (entity.Any(u => u.Email.Equals(userView.Email)))
-					errorMessage += "E";
+				{
+					shortErrorCode += "E";
+					longErrorCode += "Email ";
+				}
 
-				throw new Exception(errorMessage);
+				// throw error
+				_logger.LogInfo(longErrorCode);
+				throw new Exception(shortErrorCode);
 			}
+			#endregion
 		}
 
 		public bool IsTelNoSyntaxValid(string telNo)
 		{
 			// length control
-			return telNo.Length == 11;   // T : Telephone
+			return telNo.Length == _userSettings.TelNoLength;
 		}
 
-		public async Task<bool> IsEmailSyntaxTrueAsync(string email)
+		public async Task<bool> IsEmailSyntaxValidAsync(string email)
 		{
-			// when not contain "@"
 			return await Task.Run(() =>
-				email.Contains("@")
-			);
+			{
+				#region when '@' not matched
+				var index = email.IndexOf('@');
+
+				if (index == -1)
+					return false;
+				#endregion
+
+				#region when '.' not matched
+				var emailExtension = email.Substring(index + 1);  // ex: gmail.com
+
+				if (!emailExtension.Contains('.'))
+					return false;
+				#endregion
+
+				return true;
+			});
 		}
 
-		public async Task<bool> IsPasswordSyntaxTrueAsync(string password)
+		public async Task<bool> IsPasswordSyntaxValidAsync(string password)
 		{
-			var specialChars = new List<char>() { '!', '*', '.', ',', '@', '?', '_' };
+			#region length Control
+			if (password.Length < _userSettings.MinPasswordLength  // min len
+				|| password.Length > _userSettings.MaxPasswordLength)  // max len
+				return false;
+			#endregion
 
-			// length Control
-			if (password.Length < 6  // min len
-				|| password.Length > 16)  // max len
-				return false;  // P: Password
-
-			// chars control
+			#region chars control
 			var isCharsTypeInvalid = await Task.Run(() =>
 			{
 				return password.Any(c =>
-					!specialChars.Contains(c)  // special chars
+					!_userSettings.SpecialChars.Contains(c.ToString())  // special chars
 					&& !(c >= 48 && c <= 57)  // numbers
 					&& !(c >= 65 && c <= 90)  // big alphabet chars
 					&& !(c >= 97 && c <= 122));  // small alphabet chars)
 			});
+			#endregion
 
 			return isCharsTypeInvalid ? false : true;
 		}
 	}
 }
-
-
 /* ----------------- CONFLICT ERROR CODES ----------------- 
- * R-CE    -> (R)egister - (C)onflict (E)rror
- * 
- * R-CE-T  -> (T)elephone
- * R-CE-E  -> (E)mail
- * R-CE-TE -> (T)elephone + (E)mail
+ * CE    -> (C)onflict (E)rror
+ * CE-T  -> (T)elephone
+ * CE-E  -> (E)mail
+ * CE-TE -> (T)elephone + (E)mail
  */
 
 
 /* ----------------- FORMAT ERROR CODES -----------------
- * R-FE     -> (R)egister - (F)ormat (E)rror
- * R-FE-T   -> (T)elephone
- * R-FE-TE  -> (T)elephone + (E)mail
- * R-FE-TP  -> (T)elephone + (P)assword
- * R-FE-TEP -> (T)elephone + (E)mail + (P)assword
- * R-FE-E   -> (E)mail
- * R-FE-EP  -> (E)mail + (P)assword
- * R-FE-P   -> (P)assword
+ * FE     -> (F)ormat (E)rror
+ * FE-T   -> (T)elephone
+ * FE-TE  -> (T)elephone + (E)mail
+ * FE-TP  -> (T)elephone + (P)assword
+ * FE-TEP -> (T)elephone + (E)mail + (P)assword
+ * FE-E   -> (E)mail
+ * FE-EP  -> (E)mail + (P)assword
+ * FE-P   -> (P)assword
 */

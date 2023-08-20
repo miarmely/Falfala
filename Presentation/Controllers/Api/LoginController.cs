@@ -6,51 +6,34 @@ using Services.Contracts;
 
 namespace Presentation.Controllers.Api
 {
-    [ApiController]
-    [Route("api/login")]
-    public class LoginController : ControllerBase
-    {
-        private readonly IServiceManager _manager;
+	[ApiController]
+	[Route("api/login")]
+	public class LoginController : ControllerBase
+	{
+		private readonly IServiceManager _manager;
 
-        public LoginController(IServiceManager manager) =>
-            _manager = manager;
+		public LoginController(IServiceManager manager) =>
+			_manager = manager;
 
-
-        [HttpPost]
-        public async Task<IActionResult> VerifyEmailAndPassword([FromBody] UserView viewModel)
-        {
-            try
-            {
-				#region email format control
-				if (!await _manager.UserService
-					.IsEmailSyntaxTrueAsync(viewModel.Email))
-					return BadRequest("FE-E");
-				#endregion
-
-				#region password format control
-				if (!await _manager.UserService
-					.IsPasswordSyntaxTrueAsync(viewModel.Password))
-					return BadRequest("FE-P");
-				#endregion
-
-				#region verification
-				await _manager.LoginService
-                    .VerifyEmailAndPassword(viewModel.Email, viewModel.Password);
-				#endregion
-
+		[HttpPost]
+		public async Task<IActionResult> VerifyEmailAndPasswordAsync([FromBody] UserView viewModel)
+		{
+			try
+			{
+				await _manager.LoginService.VerifyEmailAndPasswordAsync(viewModel);
 				return NoContent();
-            }
+			}
 
-            catch (Exception ex)
-            {
+			catch (Exception ex)
+			{
 				#region email or password format error
 				if (ex.Message.StartsWith("FE"))
-					return NotFound(ex.Message);
+					return BadRequest(ex.Message);
 				#endregion
 
-				#region email or password not matched
-				if (ex.Message.StartsWith("VE"))
-                    return NotFound(ex.Message);
+				#region email or password verification error
+				else if (ex.Message.StartsWith("VE"))
+					return NotFound(ex.Message);
 				#endregion
 
 				#region unexpected error
@@ -59,48 +42,47 @@ namespace Presentation.Controllers.Api
 			}
 		}
 
+		[HttpPost("sendMail")]
+		public async Task<IActionResult> SendMailAsync([FromBody] UserView viewModel)
+		{
+			try
+			{
+				await _manager.LoginService.SendMailAsync(viewModel);
+				return NoContent();
+			}
 
-        [HttpPost("sendMail")]
-        public async Task<IActionResult> SendMailAsync([FromBody] UserView viewModel)
-        {
-            try
-            {
-                #region email format control
-                if (!await _manager.UserService
-                    .IsEmailSyntaxTrueAsync(viewModel.Email))
-                    return BadRequest("FE-E");
-				#endregion
-
-				#region verify email
-				await _manager.LoginService
-					.VerifyEmail(viewModel.Email);
-				#endregion
-
-				#region send mail
-				await _manager.MailService
-					.SendMailAsync(new MailView()
+			catch (Exception ex)
+			{
+				#region email format error
+				if (ex.Message.Equals("FE-E"))
+					return BadRequest(new
 					{
-						To = viewModel.Email,
-						Subject = "Falfala - Şifre Yenileme",
-						Body = @$"Yeni bir şifre oluşturmak için lütfen aşağıdaki linke tıklayınız: <br>
-                                <a href='https://localhost:7131/refreshPassword/index/{viewModel.Email}'>Yeni Şifre Oluştur</a>"
+						errorCode = ex.Message,
+						errorDescription = "Format Error - Email"
 					});
 				#endregion
 
-				return NoContent();
-            }
-
-            catch (Exception ex)
-            {
-				#region email format wrong
+				#region email verification error
 				if (ex.Message.Equals("VE-E"))
-					return NotFound("VE-E");
+					return NotFound(new
+					{
+						errorCode = "VE-E",
+						errorDescription = "Verification Error - Email"
+					});
+				#endregion
+
+				#region email error
+				if (ex.Message.Equals("EE"))
+					return StatusCode(204, new
+					{
+						message = "An error occured when sending email."
+					});
 				#endregion
 
 				#region unexpected errors
-				return StatusCode(500, ex.Message);
+				return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 				#endregion
 			}
-        }
-    }
+		}
+	}
 }

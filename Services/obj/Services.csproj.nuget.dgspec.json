@@ -187,6 +187,10 @@
             "Microsoft.SqlServer.SqlManagementObjects": {
               "target": "Package",
               "version": "[170.18.0, )"
+            },
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.3.3, )"
             }
           },
           "imports": [

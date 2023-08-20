@@ -9,11 +9,11 @@ using Repositories.EF;
 
 #nullable disable
 
-namespace Repositories.Migrations
+namespace Falfala_MVC.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230817083116_update-table")]
-    partial class updatetable
+    [Migration("20230818084236_Start_Point")]
+    partial class Start_Point
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

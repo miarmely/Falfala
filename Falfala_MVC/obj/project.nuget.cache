@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MIE8xbgUb1HwZR3/s8nHDq9sqDT9A8MdaXvhPsXX+RRhBJXlReuAcYnKv/sHeP+agF2ftXjtMhrW3rEE4uxm5A==",
+  "dgSpecHash": "Xqlh1FtM30PP40TcmG2h0vU+sIB2Gy4DhPYI0X243feH0QLNJCLDEpD/OC3ifnBuNAFxmClBkgZpdsaF6ccTFw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mac\\Desktop\\SOFTWARE\\1__Software_Languages\\1__C#\\2__API\\1__Projects\\2__Falfala\\Falfala_MVC\\Falfala_MVC.csproj",
   "expectedPackageFiles": [
@@ -57,6 +57,8 @@
     "C:\\Users\\Mac\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Mac\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Mac\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\Mac\\.nuget\\packages\\nlog\\5.2.3\\nlog.5.2.3.nupkg.sha512",
+    "C:\\Users\\Mac\\.nuget\\packages\\nlog.extensions.logging\\5.3.3\\nlog.extensions.logging.5.3.3.nupkg.sha512",
     "C:\\Users\\Mac\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Mac\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\Mac\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",

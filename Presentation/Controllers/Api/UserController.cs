@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
-
+using System.Net;
 
 namespace Presentation.Controllers.Api
 {
@@ -12,75 +12,56 @@ namespace Presentation.Controllers.Api
 	{
 		private readonly IServiceManager _manager;
 
-
 		public UserController(IServiceManager manager) =>
 			_manager = manager;
 
-
 		[HttpPost]
-		public async Task<IActionResult> CreateUser([FromBody] UserView userView)
+		public async Task<IActionResult> CreateUserAsync([FromBody] UserView userView)
 		{
 			try
 			{
-				// format control
 				await _manager.UserService
-					.ControlFormatErrorOfUserAsync(userView);
-
-				// email, telNo already exists?
-				await _manager.UserService
-					.ControlConflictErrorOfUserAsync(userView);
-
-				// userView convert to user
-				var user = await _manager.DataConverterService
-					.ConvertToUserAsync(userView);
-
-				// set marital status id
-				var maritalStatus = await _manager.MaritalStatusService
-					.GetMaritalStatusByStatusNameAsync(userView.MaritalStatus, false);
-
-				user.StatusId = maritalStatus.Id;
-
-				// create
-				await _manager.UserService
-					.CreateUserAsync(user);
-
-				userView.Id = user.Id;
+					.CreateUserAsync(userView);
 
 				return StatusCode(StatusCodes.Status201Created, userView);
 			}
 
 			catch (Exception ex)
 			{
-				// when format or conflict error occured
-				if (ex.Message.StartsWith("FE-")  // format error
-					|| ex.Message.StartsWith("CE-"))  // conflict error
+				#region email format error
+				if (ex.Message.StartsWith("FE"))  // format error
 					return BadRequest(ex.Message);
+				#endregion
 
-				return NotFound(ex.Message);
+				#region conflict error
+				else if (ex.Message.StartsWith("CE"))
+					return Conflict(ex.Message);  // 409
+				#endregion
+
+				#region unexpected errors
+				return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+				#endregion
 			}
 		}
 
-
 		[HttpPut]
-		public async Task<IActionResult> UpdatePassword([FromBody] UserView viewModel)
+		public async Task<IActionResult> UpdatePasswordAsync([FromBody] UserView viewModel)
 		{
 			try
 			{
-				#region update
-				 await _manager.UserService
-					.UpdatePasswordByEmailAsync(viewModel);
-				#endregion
+				var userView = await _manager.UserService
+					.UpdatePasswordAsync(viewModel);
 
-				return NoContent();
+				return Ok(userView);
 			}
 			catch (Exception ex)
 			{
-				#region when email not matched
-				if (ex.Message.Equals("VE-E"))
-					return NotFound("VE_E");
+				#region email verification error
+				if (ex.Message.StartsWith("VE"))
+					return NotFound(ex.Message);
 				#endregion
 
-				#region unexpected error
+				#region unexpected errors
 				return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 				#endregion
 			}

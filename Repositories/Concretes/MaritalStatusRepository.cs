@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace Repositories.Concretes
 {
-    public class MaritalStatusRepository : RepositoryBase<MaritalStatus>, IMaritalStatusRepository
-    {
+	public class MaritalStatusRepository : RepositoryBase<MaritalStatus>, IMaritalStatusRepository
+	{
+		public MaritalStatusRepository(RepositoryContext context) : base(context)
+		{ }
 
-        public MaritalStatusRepository(RepositoryContext context) : base(context)
-        { }
+		public async Task<MaritalStatus> GetMaritalStatusByNameAsync(string statusName, bool trackChanges) =>
+			await base.FindWithCondition(m => m.StatusName.Equals(statusName), trackChanges)
+				.FirstAsync();
 
-
-        public async Task<MaritalStatus> GetMaritalStatusByStatusNameAsync(string statusName, bool trackChanges) =>
-            await base.FindWithCondition(m => m.StatusName.Equals(statusName), trackChanges)
-            .FirstAsync();
-    }
+		public async Task<MaritalStatus> GetMaritalStatusByIdAsync(int id, bool trackChanges) =>
+			await base.FindWithCondition(m => m.Id == id, trackChanges)
+				.FirstAsync();
+	}
 }

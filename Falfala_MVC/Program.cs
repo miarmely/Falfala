@@ -1,22 +1,32 @@
 using Falfala_MVC.Extension;
+using NLog;
 
-var builder = WebApplication.CreateBuilder(args);
 
-#region add service extension
-builder.Services.AddControllersWithViewsAsConfigured();
-builder.Services.AddRepositoryContext(builder.Configuration);
-builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureRepositoryManager();
-builder.Services.ConfigureMailSettings(builder.Configuration);
+#region setup logger
+LogManager.Setup()
+	.LoadConfigurationFromFile();
 #endregion
 
-var app = builder.Build();
+#region add service extensions
+var builder = WebApplication.CreateBuilder(args);
 
-// Configure the HTTP request pipeline.
+builder.Services.AddControllersWithViewsAsConfigured();
+builder.Services.AddRepositoryContext(builder.Configuration);
+builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureLogger();
+builder.Services.ConfigureMailSettings(builder.Configuration);
+builder.Services.ConfigureUserSettings(builder.Configuration);
+
+var app = builder.Build();
+#endregion
+
+#region set development mode
 if (!app.Environment.IsDevelopment())
 	app.UseHsts();
+#endregion
 
-#region add middlewares
+#region add pipelines
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseStaticFiles();

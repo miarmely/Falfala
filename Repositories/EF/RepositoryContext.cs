@@ -13,15 +13,9 @@ namespace Repositories.EF
     {
         public DbSet<User> Users { get; set; }
         public DbSet<MaritalStatus> MaritalStatuses{ get; set; }
-
-
         public RepositoryContext(DbContextOptions options) : base(options)
         {}
-
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.ApplyConfiguration(new MaritalStatusConfig());
-        }
     }
 }
