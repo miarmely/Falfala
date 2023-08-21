@@ -38,3 +38,68 @@
 2023-08-20 18:58:20.0557 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
 2023-08-20 18:58:20.1072 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
 2023-08-20 18:58:20.1336 Info Configuration initialized.
+2023-08-21 10:32:30.5071 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 10:32:30.6856 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 10:32:30.8435 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 10:32:30.9151 Info Configuration initialized.
+2023-08-21 10:33:51.4143 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 10:33:51.4704 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 10:33:51.5252 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 10:33:51.5653 Info Configuration initialized.
+2023-08-21 10:37:45.4131 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 10:37:45.4699 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 10:37:45.5645 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 10:37:45.6212 Info Configuration initialized.
+2023-08-21 10:42:17.1080 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 10:42:17.1684 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 10:42:17.2215 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 10:42:17.2602 Info Configuration initialized.
+2023-08-21 10:45:31.4100 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 10:45:31.4628 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 10:45:31.5144 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 10:45:31.5611 Info Configuration initialized.
+2023-08-21 10:47:56.5352 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 10:47:56.5873 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 10:47:56.6348 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 10:47:56.6691 Info Configuration initialized.
+2023-08-21 11:06:27.6186 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 11:06:27.6749 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 11:06:27.7260 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 11:06:27.7547 Info Configuration initialized.
+2023-08-21 11:10:48.8628 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 11:10:48.9170 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 11:10:48.9682 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 11:10:49.0011 Info Configuration initialized.
+2023-08-21 11:11:51.0552 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 11:11:51.1318 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 11:11:51.2320 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 11:11:51.2687 Info Configuration initialized.
+2023-08-21 14:45:36.6831 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 14:45:37.0934 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 14:45:37.2516 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 14:45:37.3336 Info Configuration initialized.
+2023-08-21 17:15:22.9074 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 17:15:22.9686 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 17:15:23.0306 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 17:15:23.0674 Info Configuration initialized.
+2023-08-21 17:42:06.5131 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 17:42:06.5853 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 17:42:06.6562 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 17:42:06.7098 Info Configuration initialized.
+2023-08-21 17:43:30.2239 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 17:43:30.3926 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 17:43:30.4774 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 17:43:30.5260 Info Configuration initialized.
+2023-08-21 17:57:00.9081 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to parse layout containing type: longtime - LayoutRenderer type-alias is unknown: 'longtime'
+ ---> System.ArgumentException: LayoutRenderer type-alias is unknown: 'longtime'
+   at NLog.Config.FactoryExtensions.CreateInstance[TBaseType](IFactory`1 factory, String typeAlias)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2023-08-21 17:57:01.0447 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 17:57:01.0960 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 17:57:01.1411 Info Validating config: TargetNames=logFile, ConfigItems=11, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 17:57:01.1914 Info Configuration initialized.
+2023-08-21 17:57:40.8970 Info Registered target NLog.Targets.FileTarget(Name=logFile)
+2023-08-21 17:57:41.9333 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.3.1999. Product version: 5.2.3+a5ddef92a8afb22508450803e37c001f4a3ba52a. GlobalAssemblyCache: False
+2023-08-21 17:57:42.6441 Info Validating config: TargetNames=logFile, ConfigItems=12, FilePath=C:\Users\Mac\Desktop\SOFTWARE\1__Software_Languages\1__C#\2__API\1__Projects\2__Falfala\Falfala_MVC\bin\Debug\net7.0\NLog.config
+2023-08-21 17:57:42.6777 Info Configuration initialized.

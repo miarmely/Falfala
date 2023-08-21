@@ -1,4 +1,5 @@
 using Falfala_MVC.Extension;
+using Falfala_MVC.Extensions;
 using NLog;
 
 
@@ -17,11 +18,15 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLogger();
 builder.Services.ConfigureMailSettings(builder.Configuration);
 builder.Services.ConfigureUserSettings(builder.Configuration);
-
-var app = builder.Build();
 #endregion
 
-#region set development mode
+#region add error extensions
+var app = builder.Build();
+
+app.ConfigureExceptionHandler();
+#endregion
+
+#region set production and staging mode
 if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 #endregion
@@ -32,9 +37,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=refreshPassword}/{action=index}/{email}");
 #endregion
+
 
 app.Run();

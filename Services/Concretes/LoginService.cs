@@ -1,13 +1,11 @@
-﻿using Entities.ConfigModels;
-using Entities.DataModels;
+﻿using Entities.DataModels;
+using Entities.ErrorModels;
+using Entities.Exceptions;
 using Entities.ViewModels;
-using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
 using Repositories.Contracts;
 using Services.Contracts;
-using System.CodeDom;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
 
 namespace Services.Concretes
 {
@@ -39,15 +37,14 @@ namespace Services.Concretes
 			var entity = await VerifyEmailAsync(viewModel.Email);
 			#endregion
 
-			#region when password is wrong
+			#region password verification error 
 			if (!entity.Password.Equals(viewModel.Password))
-			{
-				_logger.LogInfo($"Verification Error - Password -> email:{viewModel.Email} password:{viewModel.Password}");
-				throw new Exception("VE-P");
-			}
+				throw new VerificationErrorException("VE-P"
+					, "Verification Error - Password"
+					, $"Password not matched. email:{entity.Email} && passsword:{viewModel.Password}");
 			#endregion
 		}
-
+	
 		public async Task EmailOrPasswordFormatControlAsync([Optional] string email
 			, [Optional] string password)
 		{
@@ -101,7 +98,7 @@ namespace Services.Concretes
 				To = viewModel.Email,
 				Subject = "Falfala - Şifre Yenileme",
 				Body = @$"Yeni bir şifre oluşturmak için lütfen aşağıdaki linke tıklayınız: <br>
-                                <a href='https://localhost:7131/refreshPassword/index/{viewModel.Email}'>Yeni Şifre Oluştur</a>"
+									<a href='https://localhost:7131/refreshPassword/index/{viewModel.Email}'>Yeni Şifre Oluştur</a>"
 			});
 			#endregion
 		}

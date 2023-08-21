@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
-using System.Net;
+
 
 namespace Presentation.Controllers.Api
 {
@@ -14,6 +14,7 @@ namespace Presentation.Controllers.Api
 
 		public UserController(IServiceManager manager) =>
 			_manager = manager;
+
 
 		[HttpPost]
 		public async Task<IActionResult> CreateUserAsync([FromBody] UserView userView)
@@ -43,6 +44,7 @@ namespace Presentation.Controllers.Api
 				#endregion
 			}
 		}
+
 
 		[HttpPut]
 		public async Task<IActionResult> UpdatePasswordAsync([FromBody] UserView viewModel)

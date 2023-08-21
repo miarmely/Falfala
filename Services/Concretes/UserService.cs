@@ -1,11 +1,12 @@
 ﻿using Entities.ConfigModels;
 using Entities.DataModels;
+using Entities.ErrorModels;
+using Entities.Exceptions;
 using Entities.ViewModels;
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
 using Repositories.Contracts;
 using Services.Contracts;
-using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace Services.Concretes
 {
@@ -140,7 +141,15 @@ namespace Services.Concretes
 			if (!shortErrorCode.Equals("FE-"))
 			{
 				_logger.LogInfo(longErrorCode);
-				throw new Exception(shortErrorCode);
+
+				throw new FormatErrorException(new ErrorDetails()
+				{
+					StatusCode = 400,
+					ErrorCode = shortErrorCode,
+					ErrorDescription = longErrorCode,
+					Message = "The format of your inputs wrong."
+				}
+				.ToString());
 			}
 			#endregion
 		}

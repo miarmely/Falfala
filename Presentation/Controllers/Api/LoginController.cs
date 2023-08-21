@@ -15,17 +15,14 @@ namespace Presentation.Controllers.Api
 		public LoginController(IServiceManager manager) =>
 			_manager = manager;
 
+
 		[HttpPost]
 		public async Task<IActionResult> VerifyEmailAndPasswordAsync([FromBody] UserView viewModel)
 		{
-			try
-			{
-				await _manager.LoginService.VerifyEmailAndPasswordAsync(viewModel);
-				return NoContent();
-			}
+			await _manager.LoginService.VerifyEmailAndPasswordAsync(viewModel);
+			return NoContent();
 
-			catch (Exception ex)
-			{
+			/*
 				#region email or password format error
 				if (ex.Message.StartsWith("FE"))
 					return BadRequest(ex.Message);
@@ -35,12 +32,9 @@ namespace Presentation.Controllers.Api
 				else if (ex.Message.StartsWith("VE"))
 					return NotFound(ex.Message);
 				#endregion
-
-				#region unexpected error
-				return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-				#endregion
-			}
+			*/
 		}
+
 
 		[HttpPost("sendMail")]
 		public async Task<IActionResult> SendMailAsync([FromBody] UserView viewModel)
